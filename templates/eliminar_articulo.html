@@ -1,0 +1,15 @@
+<!--templates/eliminar_publicacion--->
+{% extends '_base.html' %}
+{% block contenido %}
+{% load crispy_forms_tags %}
+<div class="container bg-light pb-3 rounded mb-4">
+<h1 class="text-center">Eliminar entrada </h1>
+<form action="" method="post">{% csrf_token %}
+    <p>Esta completamente seguro que desea eliminar <b>{{object.titulo}}</b></p>
+    <div class="d-grid gap-2 col-4 mx-auto">
+    <button class="btn btn-primary ml-2" type="submit">Confirmar</button>
+    <a href="{% url 'lista_articulos' %}" class="btn btn-danger ml-2">Cancelar</a>
+</div>
+</form>
+</div>
+{% endblock contenido %}

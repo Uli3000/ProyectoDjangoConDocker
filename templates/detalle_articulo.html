@@ -1,0 +1,88 @@
+<!--templates/detalle_articulo.html--->
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block titulo %} {{ object.titulo }} {% endblock titulo %}
+{% block contenido %}
+
+<div class="article-entry">
+    <h2>{{object.titulo}}</h2>
+   
+  <ul>
+  <li><a class="btn btn-outline-info" >{{object.genero}}</a></li>
+  <li></li><a class="btn btn-outline-primary" href="{% url 'lista_articulos_por_categoria' plataforma=object.plataforma %}">{{object.plataforma}}</a> </li>
+  <li></li><a class="btn btn-outline-info">{{object.modalidad}}</a></li> 
+</ul>
+   
+   {% if object.imagen %}
+   <div style="text-align: center;">
+       <img src="{{ object.imagen.url }}" alt="image">
+   </div>
+   
+   {% endif %}
+    <br>
+    <p text-align="center" font-size=20px >{{object.descripcion}}</p>
+    
+    <p text-align="center" >{{object.fecha}}</p>
+   <hr>
+   {% if user.is_authenticated or user.socialaccount_set.all %}
+   <p text-align="center"><h2>${{object.costo}}</h2></p>
+   <div class="container">
+       <!-- Set up a container element for the button -->
+       <div id="paypal-button-container"></div>
+   
+       <!-- Include the PayPal JavaScript SDK -->
+       <script src="https://www.paypal.com/sdk/js?client-id=ARJfG7isFPO4U9EVkGhlSQElzN-qduYV1PJ0lkGC7NGnGQxsQJB1tFBUYooJrBDRMxVo5V4SgnQicu5n"></script>
+       <script>
+           // Render the PayPal button into #paypal-button-container
+           paypal.Buttons({
+   
+               // Call your server to set up the transaction
+               createOrder: function(data, actions) {
+                   return actions.order.create({
+                       purchase_units: [{
+                           amount: {
+   
+                               value: {{object.costo}},
+   
+                           }
+                       }]
+                   });
+               },
+   
+               // Call your server to finalize the transaction
+               onApprove: function(data, actions) {
+                   return actions.order.capture().then(function(details) {
+   
+                       alert('transaction completed by ' + details.payer.name.given_name);
+                   });
+               }
+   
+           }).render('#paypal-button-container');
+       </script>
+   </div>
+   {% endif %}
+    <p text-align="center" > <a href="{% url 'lista_articulos' %}" class="btn btn-outline-primary">Volver <i class="bi bi-arrow-return-left"></i></a>
+     {% if user.is_staff %} 
+    <a href="{% url 'editar_articulo' object.pk %}" class="btn btn-success">Modificar <i class="bi bi-plus-circle"></i></a>
+    <a href="{% url 'eliminar_articulo' object.pk %}" class="btn btn-danger">Eliminar <i class="bi bi-trash"></i></a> </p>
+     {% endif %}</p>
+</div>
+<div>
+<hr>
+<div class="container mb-5">
+<h4>Agregar un comentario</h4>
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <hr>
+    <button class="btn btn-success ml-2" type="submit">Guardar</button>
+</form>
+
+<div class="container bg-light my-4 rounded">
+<h4><p text-align="center">Comentarios</p></h4>
+{% for comentario in object.comentario_set.all %}
+    <p>{{ comentario.autor }} &middot; {{ comentario.comentario }}</p>
+</div>
+</div>
+{% endfor %}
+{% endblock contenido %}

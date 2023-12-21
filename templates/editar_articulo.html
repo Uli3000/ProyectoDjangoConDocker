@@ -1,0 +1,21 @@
+{% extends '_base.html' %}
+{% block contenido %}
+{% load crispy_forms_tags %}
+<!-- <div class="article-entry">
+    <h2>{{object.titulo}}</h2>
+    <p>por {{object.autor}} | {{object.fecha}}</p>
+    <p>{{object.cuerpo}}</p>
+</div> -->
+<form class="container bg-light pb-3 rounded mb-4" action="" method="post">{% csrf_token %}
+    {{ form|crispy}}
+    
+    <div class="d-grid gap-2 col-4 mx-auto">
+    <input class="btn btn-primary ml-2" type="submit" value="Modificar">
+    <a href="{% url 'lista_articulos' %}" class="btn btn-danger ml-2">Cancelar</a>
+    </div>
+
+    </form>
+
+<!-- <p><a href="{% url 'lista_articulos' %}">Modificar</a> | <a href="#">Eliminar</a></p>
+<p>Volver a <a href="{% url 'lista_articulos' %}">Todos los articulos</a></p> -->
+{% endblock contenido %}

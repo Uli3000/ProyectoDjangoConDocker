@@ -1,0 +1,40 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load allauth account socialaccount %}
+{% block head_title %}
+    {% trans "Sign In" %}
+{% endblock head_title %}
+{% block contenido %}
+<div class="col-md-4 mx-auto">
+    {% element h2 %}
+        {% trans "Sign In" %}
+    {% endelement %}
+    <p>
+        {% blocktrans %}Si no has creado una cuenta aun, entonces
+    <a href="{{ signup_url }}">registrate</a> primero.{% endblocktrans %}
+    </p>
+    {% url 'account_login' as login_url %}
+    {% element form form=form method="post" action=login_url tags="entrance,login" %}
+    
+    {{ form|crispy }}
+        {% slot body %}
+            {% csrf_token %}
+            {% element fields form=form unlabeled=True %}
+            {% endelement %}
+            {% if redirect_field_value %}
+                <input type="hidden"
+                       name="{{ redirect_field_name }}"
+                       value="{{ redirect_field_value }}" />
+            {% endif %}
+        {% endslot %}
+        {% slot actions %}
+        <div class="d-grid gap-2">
+        <input type="submit" class="btn btn-primary " value="{% trans 'Sign In' %}">
+    </div>
+        {% endslot %}
+    
+    {% endelement %}
+
+</div>
+{% endblock contenido %}

@@ -1,0 +1,38 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load socialaccount %}
+
+{% block contenido %}
+  {% providers_media_js %}
+
+  <div class="login-container">
+
+    {% if user.is_authenticated %}
+    <div class="welcome-message">
+      <p>¡Bienvenido {{ user.username }} !</p>
+      <nav></nav>
+    </div>
+    {% else %}
+
+    <h2>Iniciar sesión comunmente</h2>
+    <form method="post" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+    </div>
+    </form>
+
+    <a href="{% url 'account_reset_password' %}">¿Olvidaste tu contraseña?</a>
+  </div>
+    <div class="login-container">
+    <h2>Iniciar sesión con Google</h2>
+    <a href="{% provider_login_url 'google' %}" class="google-btn">
+      <img src="{% static 'google.png' %}" alt="Google Icon">
+      Iniciar sesión con Google
+    </a>
+
+    {% endif %}
+  </div>
+
+{% endblock contenido %}

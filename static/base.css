@@ -1,0 +1,111 @@
+/* En tu archivo de estilos CSS */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+
+  h3 {
+    text-align: center;
+    color: #333;
+  }
+
+
+  p {
+    text-align: center;
+    color: #333;
+  }
+  
+  .google-btn {
+    display: block;
+    text-align: center;
+    background-color: #4285f4;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+  }
+  
+  .google-btn img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  
+  .google-btn:hover {
+    background-color: #3c79b5;
+  }
+  
+  .p{
+    text-align: center;
+  }
+
+  .welcome-message {
+    text-align: center;
+    margin-top: 20px; /* Ajusta según sea necesario */
+    padding: 10px;
+    background-color: #e0f7fa; /* Un color de fondo de ejemplo */
+    border-radius: 5px;
+  }
+  
+  /* base.css */
+
+/* Estilos básicos para la barra de navegación */
+nav {
+  background-color: #333;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0; /* Elimina el relleno predeterminado del borde de la lista */
+}
+
+li {
+  margin: 0 15px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  border-bottom: 2px solid white;
+}
+
+/* Estilos adicionales para centrar los elementos */
+nav ul {
+  display: flex;
+  align-items: center; /* Centra verticalmente los elementos en la lista */
+}
+
+nav li {
+  text-align: center; /* Centra horizontalmente el texto dentro de cada elemento de la lista */
+}
+
+.centered-image {
+  text-align: center;
+}
+

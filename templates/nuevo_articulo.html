@@ -1,0 +1,18 @@
+<!--plantillas/nuevo_articulo-->
+{% extends '_base.html' %}
+
+{% block contenido %}
+{% load crispy_forms_tags %}
+<div class="container my-3">
+<h1>Nuevo Articulo</h1>
+<form class="container bg-light rounded mb-4 py-3" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+
+    {{ form|crispy }}
+
+    <div class="d-grid gap-2 col-4 mx-auto">
+    <button class="btn btn-success" type="submit">Guardar</button>
+    <a href="{% url 'lista_articulos' %}" class="btn btn-danger">Cancelar</a>
+</div>
+</form>
+</div>
+{% endblock contenido %}

@@ -1,0 +1,15 @@
+<!--plantillas/resgistration/signup-->
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block titulo %} - Registro {% endblock titulo %}
+
+{% block contenido %}
+<h2>Registro</h2>
+<form action="" method="post">{% csrf_token %}
+    {{form|crispy}}
+
+    <button type="submit" class="btn btn-success">Registrarme</button>
+</form>
+<p>&nbsp;</p>
+{% endblock contenido %}

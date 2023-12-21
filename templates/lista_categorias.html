@@ -1,0 +1,50 @@
+<!-- templates/lista_categorias.html -->
+{% extends '_base.html' %}
+
+{% block titulo %}Categorías{% endblock titulo %}
+
+{% block contenido %}
+  <h2>Filtro de categorias</h2>
+  <hr>
+
+  <form class="container bg-light pb-3 rounded mb-4 py-2" method="get" action="{% url 'lista_categorias' %}">
+    {{ form.as_p }}
+    <div class="d-grid gap-2 col-4 mx-auto">
+    <button class="btn btn-primary" type="submit">Filtrar</button>
+</div>
+  </form>
+
+  <div class="row">
+    {% for articulo in articulo_list %}
+        <div class="col-md-6">
+            <div class="card mb-3 mx-2">
+                <div class="card-header bg-info">
+                    <h3 class="font-weight-bold link-dark">
+                        <a href="{% url 'detalle_articulo' articulo.pk %}"  class="navbar-brand">
+                            {{ articulo.titulo }}
+                        </a>
+                    </h3>
+                    <div class="text-center">
+                    <span class="badge rounded-pill text-bg-light mx-2">{{ articulo.plataforma }}</span>
+                    <span class="badge rounded-pill text-bg-light mx-2">{{ articulo.genero }}</span>
+                    <span class="badge rounded-pill text-bg-light mx-2">{{ articulo.modalidad }}</span>
+                </div>
+                </div>
+                <div class="card-body">
+                {% if articulo.imagen %}
+                    <div style="text-align: center;">
+                     <a href="{% url 'detalle_articulo' articulo.pk %}"> <img src="{{ articulo.imagen.url }}" alt="image"> </a>
+                    </div>
+                 {% endif %}
+                 <hr>
+                   <p text-align="center card-text"> {{ articulo.descripcion }}</p>
+                   
+                </div>
+                <div class="text-center card-footer ">
+                    <b>{{ articulo.fecha }}</b>
+                 </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock contenido %}
